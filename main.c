@@ -2,7 +2,6 @@
 // Copyright (c) 2025 Trenser Technology Solutions
 // All Rights Reserved
 //******************************************************************************
-//
 // File    : main.c
 // Summary : To print hello world
 // Note    : No other header files included.
@@ -11,7 +10,6 @@
 //******************************************************************************
 
 //******************************* Include Files ********************************
-
 #include <stdio.h>
     
 //******************************* Local Types **********************************
