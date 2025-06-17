@@ -26,7 +26,7 @@
 // Purpose : Printing statement for user to read.
 // Inputs  : None
 // Outputs : None
-// Return  : None
+// Return  : Zero
 // Notes   : None
 //******************************************************************************
 int main()
