@@ -1,5 +1,5 @@
 //**************************** PRINT A STATEMENT *******************************
-// Copyright (c) 2024 Trenser Technology Solutions
+// Copyright (c) 2025 Trenser Technology Solutions
 // All Rights Reserved
 //******************************************************************************
 //
@@ -7,11 +7,13 @@
 // Summary : To print hello world
 // Note    : No other header files included.
 // Author  : Meenakshy G
-// Date    : 16/JUNE/2024
+// Date    : 16/JUNE/2025
 //******************************************************************************
+
 //******************************* Include Files ********************************
+
 #include <stdio.h>
-//
+    
 //******************************* Local Types **********************************
 
 //***************************** Local Constants ********************************
@@ -30,5 +32,6 @@
 int main()
 {
     printf("HELLO WORLD");
+    return 0;
 }
 // EOF
