@@ -1,4 +1,4 @@
-//**************************** PRINT A STATEMENT *******************************
+//**************************** HELLO WORLD *******************************
 // Copyright (c) 2025 Trenser Technology Solutions
 // All Rights Reserved
 //******************************************************************************
@@ -30,7 +30,7 @@
 int main()
 {
     printf("HELLO WORLD");
-    
+
     return 0;
 }
 // EOF
