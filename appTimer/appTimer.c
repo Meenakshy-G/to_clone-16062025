@@ -1,4 +1,4 @@
-//**************************** TimerApp *************************************
+//**************************** TimerApp ****************************************
 // Copyright (c) 2025 Trenser Technology Solutions
 // All Rights Reserved
 //******************************************************************************
@@ -25,15 +25,15 @@
 
 //******************************.AppTimerPrintTime.*****************************
 // Purpose : To print the values of date and time of corresponding timezones. 
-// Inputs  : Pointer pEpochTime that points to value of epoch.
+// Inputs  : Pointer pulEpochTime that points to value of epoch.
 // Outputs : Prints the values of date and time accordingly
 // Return  : True in case of success and False in case of failure. 
 // Notes   : None
 //******************************************************************************
-bool AppTimerPrintTime(uint32 *pEpochTime)
+bool AppTimerPrintTime(uint32 *pulEpochTime)
 {
     struct tm *pTimeParts;
-    pTimeParts = localtime(pEpochTime);
+    pTimeParts = localtime(pulEpochTime);
     uint8 ucAmOrPm[MAX_LIMIT];
 
     if (HOUR_LIMIT <= pTimeParts->tm_hour)

@@ -1,11 +1,9 @@
-//**************************** TimerApp ************************************
+//**************************** TimerApp ****************************************
 // Copyright (c) 2025 Trenser Technology Solutions
 // All Rights Reserved 
 //****************************************************************************** 
-//
 // Summary : Contains all type defenitions and declarations. 
 // Note    : None
-// 
 //****************************************************************************** 
 #ifndef _APPTIMER_H
 #define _APPTIMER_H
@@ -30,7 +28,6 @@ typedef unsigned long uint32;
 //***************************** Global Variables ******************************* 
 struct tm *pCurrentTime;
 uint8 ucTimeString[MAX_LIMIT];
-uint8 *pToken;
 
 //**************************** Forward Declarations **************************** 
 bool AppTimerPrintTime(uint32 *epochTime);
