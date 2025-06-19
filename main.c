@@ -36,6 +36,9 @@
 //******************************************************************************
 int main()
 {
+    time_t currentTime;
+    time_t currentTimeUtc;
+    time_t currentTimePst;
     while (true)
     {
         time(&currentTime);

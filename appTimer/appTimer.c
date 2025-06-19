@@ -33,6 +33,9 @@
 //******************************************************************************
 bool AppTimerDateTime(uint32 *ulpEpochTime)
 {
+    uint8 ucTimeString[MAX_LIMIT];
+    uint8 *ucpToken;
+    struct tm *pCurrentTime;
     pCurrentTime = localtime(ulpEpochTime);
     strftime(ucTimeString, sizeof(ucTimeString), 
              "%I:%M:%S %p,%d/%m/%Y ", pCurrentTime);

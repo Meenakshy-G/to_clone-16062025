@@ -12,9 +12,6 @@
 #include <time.h>
 
 //******************************* Global Types *********************************
-time_t currentTime;
-time_t currentTimeUtc;
-time_t currentTimePst;
 typedef unsigned char uint8;
 typedef unsigned long uint32;
 
@@ -24,9 +21,6 @@ typedef unsigned long uint32;
 #define MAX_LIMIT (80)
 
 //***************************** Global Variables ******************************* 
-struct tm *pCurrentTime;
-uint8 ucTimeString[MAX_LIMIT];
-uint8 *ucpToken;
 
 //**************************** Forward Declarations **************************** 
 bool AppTimerDateTime(uint32 *pulEpochTime);
