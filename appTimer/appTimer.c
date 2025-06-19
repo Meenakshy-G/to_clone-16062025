@@ -51,7 +51,7 @@ bool AppTimerEpochToTime(uint32 *ulpEpochtime)
                              (SECONDS_IN_MONTH * ulMonth_minus_one);
     uint32 ulRemainingEpochDays = (*ulpEpochtime) - ulSecondsinDays;
     uint32 ulDay = ulRemainingEpochDays / SECONDS_IN_DAY ;
-    uint32 ulActualDay = ulDay + INCREMENT_TWO;
+    uint32 ulActualDay = ulDay + INCREMENT;
 
     uint32 ulSeconds = (*ulpEpochtime) % SECONDS_MINUTES;
     *ulpEpochtime = *ulpEpochtime / SECONDS_MINUTES;

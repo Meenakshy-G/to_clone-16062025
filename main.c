@@ -55,13 +55,14 @@ int main()
 
         printf("IST (+05:30)\n");
         printf("--------------------\n");
-        ulCurrentTimeIst = ulEpochStorage2 + IST_TIME_DIFFERENCE - SECONDS_IN_DAY;
+        ulCurrentTimeIst = ulEpochStorage2 + IST_TIME_DIFFERENCE; 
         AppTimerEpochToTime(&ulCurrentTimeIst);
         printf("\n");
 
         printf("PST (-07:00)\n");
         printf("--------------------\n");
-        ulCurrentTimePst = ulEpochStorage3 - PST_TIME_DIFFERENCE;
+        ulCurrentTimePst = ulEpochStorage3 - 
+                           PST_TIME_DIFFERENCE + SECONDS_IN_DAY;;
         AppTimerEpochToTime(&ulCurrentTimePst);
         printf("\n");
 
