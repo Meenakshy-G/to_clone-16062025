@@ -46,7 +46,6 @@ bool AppTimerDateTime(uint32 *ulpEpochTime)
     printf("DATE : %s \n", ucpToken);
 
     return true;
-
 }
 //******************************.mainFunction.**********************************
 //******************************************************************************
