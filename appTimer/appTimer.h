@@ -19,19 +19,20 @@ typedef unsigned char uint8;
 typedef unsigned long uint32;
 
 //***************************** Global Constants ******************************* 
-#define PST_TIME_DIFFERENCE  (45000)
-#define UTC_TIME_DIFFERENCE  (19800)
-#define YEAR_CORRECTION      (1900)
-#define HOUR_LIMIT           (12)
-#define INDEX_LIMIT          (10)
-#define MAX_LIMIT            (3)
+#define PST_TIME_DIFFERENCE (45000)
+#define UTC_TIME_DIFFERENCE (19800)
+#define MAX_LIMIT (80)
 
 //***************************** Global Variables ******************************* 
 struct tm *pCurrentTime;
+
 uint8 ucTimeString[MAX_LIMIT];
 
+uint8 *pToken;
+
+
 //**************************** Forward Declarations **************************** 
-bool AppTimerPrintTime(uint32 *epochTime);
+bool AppTimerDateTime(uint32 *pulEpochTime);
 
 //*********************** Inline Method Implementations ************************ 
 

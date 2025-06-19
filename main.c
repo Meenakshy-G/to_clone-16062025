@@ -15,6 +15,7 @@
 #include <stdbool.h>
 #include <time.h>
 #include <unistd.h>
+#include <string.h>
 #include "appTimer.h"
 
 //******************************* Local Types **********************************
@@ -40,19 +41,19 @@ int main()
         printf("UTC (0:00)\n");
         printf("--------------------\n");
         currentTimeUtc = currentTime - UTC_TIME_DIFFERENCE;
-        AppTimerPrintTime(&currentTimeUtc);
+        AppTimerDateTime(&currentTimeUtc);
         printf("Epoch: %d\n",currentTime);
         printf("\n");
 
         printf("IST (+05:30)\n");
         printf("--------------------\n");
-        AppTimerPrintTime(&currentTime);
+        AppTimerDateTime(&currentTime);
         printf("\n");
 
         printf("PST (-07:00)\n");
         printf("--------------------\n");
         currentTimePst = currentTime - PST_TIME_DIFFERENCE;
-        AppTimerPrintTime(&currentTimePst);
+        AppTimerDateTime(&currentTimePst);
         printf("\n");
 
         sleep(1);

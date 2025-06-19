@@ -12,6 +12,7 @@
 //******************************* Include Files ********************************
 #include <stdio.h>
 #include <stdbool.h>
+#include <string.h>
 #include <time.h>
 #include "appTimer.h"
 
@@ -30,31 +31,19 @@
 // Return  : True in case of success and False in case of failure. 
 // Notes   : None
 //******************************************************************************
-bool AppTimerPrintTime(uint32 *pulEpochTime)
+bool AppTimerDateTime(uint32 *pulEpochTime)
 {
-    struct tm *pTimeParts;
-    pTimeParts = localtime(pulEpochTime);
-    uint8 ucAmOrPm[MAX_LIMIT];
+    pCurrentTime = localtime(pulEpochTime);
+    strftime(ucTimeString, sizeof(ucTimeString), 
+             "%I:%M:%S %p,%d/%m/%Y ", pCurrentTime);
 
-    if (HOUR_LIMIT <= pTimeParts->tm_hour)
-    {
-        ucAmOrPm[0] = 'P';
-        ucAmOrPm[1] = 'M';
-        pTimeParts->tm_hour -= HOUR_LIMIT;
-    }
-    else
-    {
-        ucAmOrPm[0] = 'A';
-        ucAmOrPm[1] = 'M';
-    }
-    printf("TIME : %02d:%02d:%02d %s\n",
-            pTimeParts->tm_hour, pTimeParts->tm_min, 
-            pTimeParts->tm_sec, ucAmOrPm);
-
-    printf("DATE : %02d/%02d/%02d \n", pTimeParts->tm_mday, 
-            pTimeParts->tm_mon+1, pTimeParts->tm_year + YEAR_CORRECTION);
+    pToken = strtok(ucTimeString, ",");
+    printf("TIME : %s\n", pToken);
+    pToken = strtok(NULL, "\0");
+    printf("DATE : %s \n", pToken);
 
     return true;
+
 }
 //******************************.mainFunction.**********************************
 
