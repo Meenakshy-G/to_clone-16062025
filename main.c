@@ -17,6 +17,7 @@
 #include <unistd.h>
 #include <string.h>
 #include "appTimer.h"
+#include "common.h"
 
 //******************************* Local Types **********************************
 
@@ -27,8 +28,7 @@
 //****************************** Local Functions *******************************
 
 //******************************.mainFunction.**********************************
-// Purpose : To print the menu and call function to convert and 
-//           print times with timezones.
+// Purpose : Display menu and refresh time
 // Inputs  : None
 // Outputs : None
 // Return  : Zero
@@ -37,27 +37,32 @@
 int main()
 {
     time_t currentTime;
-    time_t currentTimeUtc;
-    time_t currentTimePst;
+    uint32 currentTimeIst;
+    uint32 currentTimePst;
+
     while (true)
     {
         time(&currentTime);
+        uint32 unEpochStorage = currentTime;
+        uint32 unEpochStorage2 = currentTime;
+        uint32 unEpochStorage3 = currentTime;
         printf("UTC (0:00)\n");
         printf("--------------------\n");
-        currentTimeUtc = currentTime - UTC_TIME_DIFFERENCE;
-        AppTimerDateTime(&currentTimeUtc);
-        printf("Epoch: %ld\n",currentTime);
+
+        AppTimerEpochToTime(&currentTime);
+        printf("Epoch: %d\n", unEpochStorage);
         printf("\n");
 
         printf("IST (+05:30)\n");
         printf("--------------------\n");
-        AppTimerDateTime(&currentTime);
+        currentTimeIst = unEpochStorage2 + IST_TIME_DIFFERENCE - SECONDS_IN_DAY;
+        AppTimerEpochToTime(&currentTimeIst);
         printf("\n");
 
         printf("PST (-07:00)\n");
         printf("--------------------\n");
-        currentTimePst = currentTime - PST_TIME_DIFFERENCE;
-        AppTimerDateTime(&currentTimePst);
+        currentTimePst = unEpochStorage3 - PST_TIME_DIFFERENCE;
+        AppTimerEpochToTime(&currentTimePst);
         printf("\n");
 
         sleep(SLEEP_TIME);

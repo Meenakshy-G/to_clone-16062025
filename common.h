@@ -2,41 +2,27 @@
 // Copyright (c) 2025 Trenser Technology Solutions
 // All Rights Reserved 
 //****************************************************************************** 
-// Summary : Contains all declarations and macros.
+// Summary : Contains all type definitions.
 // Note    : None
 //****************************************************************************** 
-#ifndef _APPTIMER_H
-#define _APPTIMER_H
+#ifndef _COMMON_H
+#define _COMMON_H
 
 //******************************* Include Files ******************************** 
-#include <time.h>
-#include "../common.h"
 
 //******************************* Global Types *********************************
+typedef unsigned char uint8;
+typedef unsigned long uint32;
+typedef unsigned short uint16;
 
 //***************************** Global Constants ******************************* 
-#define PST_TIME_DIFFERENCE (25200)
-#define IST_TIME_DIFFERENCE (19800)
-#define SECONDS_IN_DAY      (86400)
-#define SECONDS_IN_YEAR     (31556926)
-#define SECONDS_IN_MONTH    (2629743)
-#define YEAR_STARTING       (1970)
-#define MAX_LIMIT           (80)
-#define SECONDS_MINUTES     (60)
-#define HOURS               (24)
-#define AM_PM_LIMIT         (3)
-#define SLEEP_TIME          (1)
-#define HOUR_LIMIT          (12)
-#define MONTHS              (12)
-#define INCREMENT           (1)
-#define INCREMENT_TWO       (2)
 
 //***************************** Global Variables ******************************* 
 
 //**************************** Forward Declarations **************************** 
-bool AppTimerEpochToTime(uint32 *ulpEpochtime);
 
-//*********************** Inline Method Implementations ************************ 
+//*********************** Inline Method Implementations ************************
+
 //******************************************************************************
 
 #endif // _APPTIMER_H 
