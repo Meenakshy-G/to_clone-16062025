@@ -43,25 +43,25 @@ int main()
     while (true)
     {
         time(&currentTime);
-        uint32 unEpochStorage = currentTime;
-        uint32 unEpochStorage2 = currentTime;
-        uint32 unEpochStorage3 = currentTime;
+        uint32 ulEpochStorage = currentTime;
+        uint32 ulEpochStorage2 = currentTime;
+        uint32 ulEpochStorage3 = currentTime;
         printf("UTC (0:00)\n");
         printf("--------------------\n");
 
         AppTimerEpochToTime(&currentTime);
-        printf("Epoch: %d\n", unEpochStorage);
+        printf("Epoch: %ld\n", ulEpochStorage);
         printf("\n");
 
         printf("IST (+05:30)\n");
         printf("--------------------\n");
-        currentTimeIst = unEpochStorage2 + IST_TIME_DIFFERENCE - SECONDS_IN_DAY;
+        currentTimeIst = ulEpochStorage2 + IST_TIME_DIFFERENCE - SECONDS_IN_DAY;
         AppTimerEpochToTime(&currentTimeIst);
         printf("\n");
 
         printf("PST (-07:00)\n");
         printf("--------------------\n");
-        currentTimePst = unEpochStorage3 - PST_TIME_DIFFERENCE;
+        currentTimePst = ulEpochStorage3 - PST_TIME_DIFFERENCE;
         AppTimerEpochToTime(&currentTimePst);
         printf("\n");
 

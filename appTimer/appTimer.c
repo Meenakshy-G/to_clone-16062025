@@ -34,40 +34,40 @@
 //******************************************************************************
 bool AppTimerEpochToTime(uint32 *ulpEpochtime)
 {
-    if (*ulpEpochtime == NULL)
+    if (ulpEpochtime == NULL)
     {
         return false;
     }
 
-    uint32 unYear = *ulpEpochtime / SECONDS_IN_YEAR;
-    uint32 unActualYear = unYear + YEAR_STARTING;
+    uint32 ulYear = *ulpEpochtime / SECONDS_IN_YEAR;
+    uint32 ulActualYear = ulYear + YEAR_STARTING;
 
-    uint32 unMonthCorrection = unYear * MONTHS;
-    uint32 unMonth = *ulpEpochtime / SECONDS_IN_MONTH;
-    uint32 unMonth_minus_one = unMonth - unMonthCorrection;
-    uint32 unActualMonth = unMonth_minus_one + INCREMENT; 
+    uint32 ulMonthCorrection = ulYear * MONTHS;
+    uint32 ulMonth = *ulpEpochtime / SECONDS_IN_MONTH;
+    uint32 ulMonth_minus_one = ulMonth - ulMonthCorrection;
+    uint32 ulActualMonth = ulMonth_minus_one + INCREMENT; 
 
-    uint32 unSecondsinDays = (SECONDS_IN_YEAR * unYear) + 
-                             (SECONDS_IN_MONTH * unMonth_minus_one);
-    uint32 unRemainingEpochDays = (*ulpEpochtime) - unSecondsinDays;
-    uint32 unDay = unRemainingEpochDays / SECONDS_IN_DAY ;
-    uint32 unActualDay = unDay + INCREMENT_TWO;
+    uint32 ulSecondsinDays = (SECONDS_IN_YEAR * ulYear) + 
+                             (SECONDS_IN_MONTH * ulMonth_minus_one);
+    uint32 ulRemainingEpochDays = (*ulpEpochtime) - ulSecondsinDays;
+    uint32 ulDay = ulRemainingEpochDays / SECONDS_IN_DAY ;
+    uint32 ulActualDay = ulDay + INCREMENT_TWO;
 
-    uint32 unSeconds = (*ulpEpochtime) % SECONDS_MINUTES;
+    uint32 ulSeconds = (*ulpEpochtime) % SECONDS_MINUTES;
     *ulpEpochtime = *ulpEpochtime / SECONDS_MINUTES;
 
-    uint32 unMinutes = (*ulpEpochtime) % SECONDS_MINUTES;
+    uint32 ulMinutes = (*ulpEpochtime) % SECONDS_MINUTES;
     *ulpEpochtime = *ulpEpochtime / SECONDS_MINUTES;
 
-    uint32 unHours = (*ulpEpochtime) % HOURS;
+    uint32 ulHours = (*ulpEpochtime) % HOURS;
     *ulpEpochtime = *ulpEpochtime / HOURS;
 
     uint8 ucAmOrPm[AM_PM_LIMIT];
-    if (HOUR_LIMIT <= unHours)
+    if (HOUR_LIMIT <= ulHours)
     {
         ucAmOrPm[0] = 'P';
         ucAmOrPm[1] = 'M';
-        unHours -= HOUR_LIMIT;
+        ulHours -= HOUR_LIMIT;
     }
     else
     {
@@ -75,10 +75,10 @@ bool AppTimerEpochToTime(uint32 *ulpEpochtime)
         ucAmOrPm[1] = 'M';
     }
 
-    printf("TIME : %02d:%02d:%02d %s \n", 
-                   unHours, unMinutes, unSeconds, ucAmOrPm);
-    printf("DATE : %02d/%02d/%02d \n", 
-                   unActualDay, unActualMonth, unActualYear);
+    printf("TIME : %02ld:%02ld:%02ld %s \n", 
+                   ulHours, ulMinutes, ulSeconds, ucAmOrPm);
+    printf("DATE : %02ld/%02ld/%02ld \n", 
+                   ulActualDay, ulActualMonth, ulActualYear);
     
     return true;
 }
