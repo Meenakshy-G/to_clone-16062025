@@ -43,7 +43,7 @@ int main()
         printf("--------------------\n");
         currentTimeUtc = currentTime - UTC_TIME_DIFFERENCE;
         AppTimerDateTime(&currentTimeUtc);
-        printf("Epoch: %d\n",currentTime);
+        printf("Epoch: %ld\n",currentTime);
         printf("\n");
 
         printf("IST (+05:30)\n");
