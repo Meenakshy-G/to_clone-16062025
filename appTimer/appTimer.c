@@ -24,7 +24,7 @@
 
 //****************************** Local Functions *******************************
 
-//******************************.AppTimerPrintTime.*****************************
+//******************************.AppTimerDateTime.*****************************
 // Purpose : To print the values of date and time of corresponding timezones. 
 // Inputs  : Pointer pulEpochTime that points to value of epoch.
 // Outputs : Prints the values of date and time accordingly
