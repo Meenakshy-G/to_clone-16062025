@@ -37,8 +37,8 @@
 int main()
 {
     time_t currentTime;
-    uint32 currentTimeIst;
-    uint32 currentTimePst;
+    uint32 ulCurrentTimeIst;
+    uint32 ulCurrentTimePst;
 
     while (true)
     {
@@ -55,14 +55,14 @@ int main()
 
         printf("IST (+05:30)\n");
         printf("--------------------\n");
-        currentTimeIst = ulEpochStorage2 + IST_TIME_DIFFERENCE - SECONDS_IN_DAY;
-        AppTimerEpochToTime(&currentTimeIst);
+        ulCurrentTimeIst = ulEpochStorage2 + IST_TIME_DIFFERENCE - SECONDS_IN_DAY;
+        AppTimerEpochToTime(&ulCurrentTimeIst);
         printf("\n");
 
         printf("PST (-07:00)\n");
         printf("--------------------\n");
-        currentTimePst = ulEpochStorage3 - PST_TIME_DIFFERENCE;
-        AppTimerEpochToTime(&currentTimePst);
+        ulCurrentTimePst = ulEpochStorage3 - PST_TIME_DIFFERENCE;
+        AppTimerEpochToTime(&ulCurrentTimePst);
         printf("\n");
 
         sleep(SLEEP_TIME);
