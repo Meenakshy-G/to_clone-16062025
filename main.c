@@ -27,7 +27,8 @@
 //****************************** Local Functions *******************************
 
 //******************************.mainFunction.**********************************
-// Purpose : To print the menu and call functions to convert and print times
+// Purpose : To print the menu and call function to convert and 
+//           print times with timezones.
 // Inputs  : None
 // Outputs : None
 // Return  : Zero

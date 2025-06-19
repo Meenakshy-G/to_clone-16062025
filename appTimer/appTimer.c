@@ -37,14 +37,14 @@ bool AppTimerDateTime(uint32 *pulEpochTime)
     strftime(ucTimeString, sizeof(ucTimeString), 
              "%I:%M:%S %p,%d/%m/%Y ", pCurrentTime);
 
-    pToken = strtok(ucTimeString, ",");
-    printf("TIME : %s\n", pToken);
-    pToken = strtok(NULL, "\0");
-    printf("DATE : %s \n", pToken);
+    pucToken = strtok(ucTimeString, ",");
+    printf("TIME : %s\n", pucToken);
+    pucToken = strtok(NULL, "\0");
+    printf("DATE : %s \n", pucToken);
 
     return true;
 
 }
 //******************************.mainFunction.**********************************
-
+//******************************************************************************
 // EOF
