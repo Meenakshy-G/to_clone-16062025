@@ -60,7 +60,7 @@ int main()
         AppTimerDateTime(&currentTimePst);
         printf("\n");
 
-        sleep(1);
+        sleep(SLEEP_TIME);
     }
 
     return 0;
