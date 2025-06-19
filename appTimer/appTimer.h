@@ -21,6 +21,7 @@ typedef unsigned long uint32;
 //***************************** Global Constants ******************************* 
 #define PST_TIME_DIFFERENCE  (45000)
 #define UTC_TIME_DIFFERENCE  (19800)
+#define YEAR_CORRECTION      (1900)
 #define HOUR_LIMIT           (12)
 #define INDEX_LIMIT          (10)
 #define MAX_LIMIT            (3)

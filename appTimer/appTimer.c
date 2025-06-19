@@ -47,21 +47,12 @@ bool AppTimerPrintTime(uint32 *pulEpochTime)
         ucAmOrPm[0] = 'A';
         ucAmOrPm[1] = 'M';
     }
+    printf("TIME : %02d:%02d:%02d %s\n",
+            pTimeParts->tm_hour, pTimeParts->tm_min, 
+            pTimeParts->tm_sec, ucAmOrPm);
 
-    if (INDEX_LIMIT > pTimeParts->tm_hour)
-    {
-        printf("TIME : 0%d:%d:%d %s\n",
-                pTimeParts->tm_hour, pTimeParts->tm_min, 
-                pTimeParts->tm_sec, ucAmOrPm);
-    }
-    else
-    {
-        printf("TIME : %d:%d:%d %s\n",
-                pTimeParts->tm_hour, pTimeParts->tm_min, 
-                pTimeParts->tm_sec, ucAmOrPm);
-    }
-    printf("DATE : %d/%d/%d \n", pTimeParts->tm_mday, 
-            pTimeParts->tm_mon+1, pTimeParts->tm_year+1900);
+    printf("DATE : %02d/%02d/%02d \n", pTimeParts->tm_mday, 
+            pTimeParts->tm_mon+1, pTimeParts->tm_year + YEAR_CORRECTION);
 
     return true;
 }
