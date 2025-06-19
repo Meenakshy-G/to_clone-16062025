@@ -26,7 +26,7 @@ typedef unsigned long uint32;
 //***************************** Global Variables ******************************* 
 struct tm *pCurrentTime;
 uint8 ucTimeString[MAX_LIMIT];
-uint8 *pucToken;
+uint8 *ucpToken;
 
 //**************************** Forward Declarations **************************** 
 bool AppTimerDateTime(uint32 *pulEpochTime);

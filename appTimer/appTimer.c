@@ -26,21 +26,21 @@
 
 //******************************.AppTimerDateTime.*****************************
 // Purpose : To print the values of date and time of corresponding timezones. 
-// Inputs  : Pointer pulEpochTime that points to value of epoch.
+// Inputs  : Pointer ulpEpochTime that points to value of epoch.
 // Outputs : Prints the values of date and time accordingly
 // Return  : True in case of success and False in case of failure. 
 // Notes   : None
 //******************************************************************************
-bool AppTimerDateTime(uint32 *pulEpochTime)
+bool AppTimerDateTime(uint32 *ulpEpochTime)
 {
-    pCurrentTime = localtime(pulEpochTime);
+    pCurrentTime = localtime(ulpEpochTime);
     strftime(ucTimeString, sizeof(ucTimeString), 
              "%I:%M:%S %p,%d/%m/%Y ", pCurrentTime);
 
-    pucToken = strtok(ucTimeString, ",");
-    printf("TIME : %s\n", pucToken);
-    pucToken = strtok(NULL, "\0");
-    printf("DATE : %s \n", pucToken);
+    ucpToken = strtok(ucTimeString, ",");
+    printf("TIME : %s\n", ucpToken);
+    ucpToken = strtok(NULL, "\0");
+    printf("DATE : %s \n", ucpToken);
 
     return true;
 
