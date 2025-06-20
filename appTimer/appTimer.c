@@ -36,6 +36,11 @@ static bool AppTimerCheckLeapYear(uint32 ulYearToCheck);
 bool AppTimerEpochToTime(uint32 *ulpEpochtime)
 {
     uint32 ulpEpochSeconds = *ulpEpochtime;
+
+    if (ulpEpochtime == NULL)
+    {
+        return false;
+    }
     uint32 ulSeconds = (*ulpEpochtime) % SECONDS_MINUTES;
     *ulpEpochtime = *ulpEpochtime / SECONDS_MINUTES;
 
@@ -119,9 +124,10 @@ bool AppTimerEpochToTime(uint32 *ulpEpochtime)
 static bool AppTimerCheckLeapYear(uint32 ulYearToCheck)
 {
     bool blResult = false;
-    if (ulYearToCheck % LEAP_YEAR_MULTIPLE == ZERO && (
-        ulYearToCheck % HUNDRED != ZERO || 
-        ulYearToCheck % FOUR_HUNDRED == ZERO))
+
+    if (ulYearToCheck % LEAP_YEAR_MULTIPLE == ZERO && 
+        (ulYearToCheck % HUNDRED != ZERO || 
+         ulYearToCheck % FOUR_HUNDRED == ZERO))
         {
             blResult = true;
         }
