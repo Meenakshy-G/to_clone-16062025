@@ -25,7 +25,7 @@
 
 //****************************** Local Functions *******************************
 
-//******************************.AppTimerDateTime.******************************
+//******************************.AppTimerEpochToTime.******************************
 // Purpose : To print the values of date and time of corresponding timezones. 
 // Inputs  : Pointer ulpEpochTime that points to value of epoch.
 // Outputs : None
@@ -34,25 +34,7 @@
 //******************************************************************************
 bool AppTimerEpochToTime(uint32 *ulpEpochtime)
 {
-    if (ulpEpochtime == NULL)
-    {
-        return false;
-    }
-
-    uint32 ulYear = *ulpEpochtime / SECONDS_IN_YEAR;
-    uint32 ulActualYear = ulYear + YEAR_STARTING;
-
-    uint32 ulMonthCorrection = ulYear * MONTHS;
-    uint32 ulMonth = *ulpEpochtime / SECONDS_IN_MONTH;
-    uint32 ulMonth_minus_one = ulMonth - ulMonthCorrection;
-    uint32 ulActualMonth = ulMonth_minus_one + INCREMENT; 
-
-    uint32 ulSecondsinDays = (SECONDS_IN_YEAR * ulYear) + 
-                             (SECONDS_IN_MONTH * ulMonth_minus_one);
-    uint32 ulRemainingEpochDays = (*ulpEpochtime) - ulSecondsinDays;
-    uint32 ulDay = ulRemainingEpochDays / SECONDS_IN_DAY ;
-    uint32 ulActualDay = ulDay + INCREMENT;
-
+    uint32 ulpEpochSeconds = *ulpEpochtime;
     uint32 ulSeconds = (*ulpEpochtime) % SECONDS_MINUTES;
     *ulpEpochtime = *ulpEpochtime / SECONDS_MINUTES;
 
@@ -62,26 +44,89 @@ bool AppTimerEpochToTime(uint32 *ulpEpochtime)
     uint32 ulHours = (*ulpEpochtime) % HOURS;
     *ulpEpochtime = *ulpEpochtime / HOURS;
 
+    uint32 ulYear = YEAR_STARTING;
+    ulpEpochSeconds /= SECONDS_IN_DAY;
+
+    while (INCREMENT)
+    {
+        uint32 ulDayInYear = 0;
+
+        if (AppTimerCheckLeapYear(ulYear) == ONE)
+        {
+            ulDayInYear = LEAP_YEAR;
+        }
+        else
+        {
+            ulDayInYear = NORMAL_YEAR;
+        }
+
+        if (ulpEpochSeconds >= ulDayInYear)
+        {
+            ulpEpochSeconds -= ulDayInYear;
+            ulYear ++;
+        }
+        else
+        {
+            break;
+        }
+    }
+    uint32 ulMonth = 0;
+    uint32 ulDaysInMonth[] = {EXTRA, FEBRUARY, EXTRA, NORMAL, EXTRA,
+                              NORMAL, EXTRA, EXTRA, NORMAL, EXTRA, NORMAL, EXTRA};
+
+    if (AppTimerCheckLeapYear(ulYear) == ONE)
+    {
+        ulDaysInMonth[INCREMENT] = LEAP;
+    }
+    
+    while (ulpEpochSeconds >= ulDaysInMonth[ulMonth])
+    {
+        ulpEpochSeconds -= ulDaysInMonth[ulMonth];
+        ulMonth ++;
+    }
+
+    uint32 ulDay = ulpEpochSeconds + INCREMENT;
     uint8 ucAmOrPm[AM_PM_LIMIT];
+
     if (HOUR_LIMIT <= ulHours)
     {
-        ucAmOrPm[0] = 'P';
-        ucAmOrPm[1] = 'M';
+        ucAmOrPm[ZERO] = 'P';
+        ucAmOrPm[ONE] = 'M';
         ulHours -= HOUR_LIMIT;
     }
     else
     {
-        ucAmOrPm[0] = 'A';
-        ucAmOrPm[1] = 'M';
+        ucAmOrPm[ZERO] = 'A';
+        ucAmOrPm[ONE] = 'M';
     }
 
-    printf("TIME : %02ld:%02ld:%02ld %s \n", 
+    printf("TIME : %02ld:%02ld:%02ld %s\n", 
                    ulHours, ulMinutes, ulSeconds, ucAmOrPm);
     printf("DATE : %02ld/%02ld/%02ld \n", 
-                   ulActualDay, ulActualMonth, ulActualYear);
+                   ulDay + DATE_INCREMENT, ulMonth, ulYear);
     
     return true;
 }
+//******************************.AppTimerCheckLeapYear.*************************
+// Purpose : To check if the given year is a leap year. 
+// Inputs  : A value corresponding to an year.
+// Outputs : None
+// Return  : True if leap year and False if not. 
+// Notes   : None
+//******************************************************************************
+bool AppTimerCheckLeapYear(uint32 ulYearToCheck)
+{
+    bool blResult = false;
+    if (ulYearToCheck % LEAP_YEAR_MULTIPLE == ZERO && 
+        ulYearToCheck % HUNDRED == ZERO || 
+        ulYearToCheck % FOUR_HUNDRED == ZERO)
+        {
+            blResult = true;
+        }
+
+    return blResult;
+}
+
 //******************************.mainFunction.**********************************
 //******************************************************************************
 // EOF

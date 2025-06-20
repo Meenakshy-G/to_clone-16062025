@@ -61,8 +61,7 @@ int main()
 
         printf("PST (-07:00)\n");
         printf("--------------------\n");
-        ulCurrentTimePst = ulEpochStorage3 - 
-                           PST_TIME_DIFFERENCE + SECONDS_IN_DAY;;
+        ulCurrentTimePst = ulEpochStorage3 - PST_TIME_DIFFERENCE;
         AppTimerEpochToTime(&ulCurrentTimePst);
         printf("\n");
 

@@ -18,23 +18,31 @@
 #define PST_TIME_DIFFERENCE (25200)
 #define IST_TIME_DIFFERENCE (19800)
 #define SECONDS_IN_DAY      (86400)
-#define SECONDS_IN_YEAR     (31556926)
-#define SECONDS_IN_MONTH    (2629743)
 #define YEAR_STARTING       (1970)
-#define MAX_LIMIT           (80)
 #define SECONDS_MINUTES     (60)
 #define HOURS               (24)
-#define AM_PM_LIMIT         (3)
+#define AM_PM_LIMIT         (2)
 #define SLEEP_TIME          (1)
 #define HOUR_LIMIT          (12)
 #define MONTHS              (12)
 #define INCREMENT           (1)
-#define INCREMENT_TWO       (2)
-
+#define HUNDRED             (100)
+#define FOUR_HUNDRED        (400)
+#define LEAP_YEAR_MULTIPLE  (4)
+#define NORMAL_YEAR         (365)
+#define LEAP_YEAR           (366)
+#define NORMAL              (30)
+#define EXTRA               (31)
+#define FEBRUARY            (28)
+#define LEAP                (29)
+#define DATE_INCREMENT      (17)
+#define ZERO                (0)
+#define ONE                 (1)
 //***************************** Global Variables ******************************* 
 
 //**************************** Forward Declarations **************************** 
 bool AppTimerEpochToTime(uint32 *ulpEpochtime);
+bool AppTimerCheckLeapYear(uint32 ulYearToCheck);
 
 //*********************** Inline Method Implementations ************************ 
 //******************************************************************************
