@@ -2,7 +2,7 @@
 // Copyright (c) 2025 Trenser Technology Solutions
 // All Rights Reserved 
 //****************************************************************************** 
-// Summary : Contains all declarations and macros.
+// Summary : Contains all forward declarations and macros.
 // Note    : None
 //****************************************************************************** 
 #ifndef _APPTIMER_H
@@ -35,7 +35,6 @@
 #define EXTRA               (31)
 #define FEBRUARY            (28)
 #define LEAP                (29)
-#define DATE_INCREMENT      (17)
 #define ZERO                (0)
 #define ONE                 (1)
 //***************************** Global Variables ******************************* 

@@ -9,7 +9,7 @@
 // Date    : 18/JUNE/2025
 //******************************************************************************
 
-//**************************** Include Files ***********************************
+//***************************** Include Files **********************************
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
@@ -50,7 +50,7 @@ bool AppTimerEpochToTime(uint32 *ulpEpochtime)
 
     while (INCREMENT)
     {
-        uint32 ulDayInYear = 0;
+        uint32 ulDayInYear = ZERO;
 
         if (AppTimerCheckLeapYear(ulYear))
         {
@@ -71,12 +71,13 @@ bool AppTimerEpochToTime(uint32 *ulpEpochtime)
         }
         ulYear ++;
     }
-    uint32 ulMonth = 0;
+
+    uint32 ulMonth = ZERO;
     uint32 ulDaysInMonth[] = {EXTRA, FEBRUARY, EXTRA, NORMAL, EXTRA,
                               NORMAL, EXTRA, EXTRA, NORMAL, EXTRA,
                               NORMAL, EXTRA};
 
-    if (AppTimerCheckLeapYear(ulYear) == ONE)
+    if (ONE == AppTimerCheckLeapYear(ulYear))
     {
         ulDaysInMonth[INCREMENT] = LEAP;
     }
@@ -86,7 +87,6 @@ bool AppTimerEpochToTime(uint32 *ulpEpochtime)
         ulpEpochSeconds -= ulDaysInMonth[ulMonth];
         ulMonth ++;
     }
-
     uint32 ulDay = ulpEpochSeconds + INCREMENT;
     uint8 ucAmOrPm[AM_PM_LIMIT];
 
