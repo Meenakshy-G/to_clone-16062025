@@ -42,7 +42,6 @@
 
 //**************************** Forward Declarations **************************** 
 bool AppTimerEpochToTime(uint32 *ulpEpochtime);
-bool AppTimerCheckLeapYear(uint32 ulYearToCheck);
 
 //*********************** Inline Method Implementations ************************ 
 //******************************************************************************

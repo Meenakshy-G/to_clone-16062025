@@ -9,7 +9,7 @@
 // Date    : 18/JUNE/2025
 //******************************************************************************
 
-//******************************* Include Files ********************************
+//**************************** Include Files ***********************************
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
@@ -17,15 +17,16 @@
 #include "appTimer.h"
 #include "../common.h"
 
-//******************************* Local Types **********************************
+//***************************** Local Types ************************************
 
 //***************************** Local Constants ********************************
 
 //***************************** Local Variables ********************************
 
-//****************************** Local Functions *******************************
+//***************************** Local Functions ********************************
+static bool AppTimerCheckLeapYear(uint32 ulYearToCheck);
 
-//******************************.AppTimerEpochToTime.******************************
+//***************************.AppTimerEpochToTime.******************************
 // Purpose : To print the values of date and time of corresponding timezones. 
 // Inputs  : Pointer ulpEpochTime that points to value of epoch.
 // Outputs : None
@@ -51,7 +52,7 @@ bool AppTimerEpochToTime(uint32 *ulpEpochtime)
     {
         uint32 ulDayInYear = 0;
 
-        if (AppTimerCheckLeapYear(ulYear) == ONE)
+        if (AppTimerCheckLeapYear(ulYear))
         {
             ulDayInYear = LEAP_YEAR;
         }
@@ -63,16 +64,17 @@ bool AppTimerEpochToTime(uint32 *ulpEpochtime)
         if (ulpEpochSeconds >= ulDayInYear)
         {
             ulpEpochSeconds -= ulDayInYear;
-            ulYear ++;
         }
         else
         {
             break;
         }
+        ulYear ++;
     }
     uint32 ulMonth = 0;
     uint32 ulDaysInMonth[] = {EXTRA, FEBRUARY, EXTRA, NORMAL, EXTRA,
-                              NORMAL, EXTRA, EXTRA, NORMAL, EXTRA, NORMAL, EXTRA};
+                              NORMAL, EXTRA, EXTRA, NORMAL, EXTRA,
+                              NORMAL, EXTRA};
 
     if (AppTimerCheckLeapYear(ulYear) == ONE)
     {
@@ -103,23 +105,23 @@ bool AppTimerEpochToTime(uint32 *ulpEpochtime)
     printf("TIME : %02ld:%02ld:%02ld %s\n", 
                    ulHours, ulMinutes, ulSeconds, ucAmOrPm);
     printf("DATE : %02ld/%02ld/%02ld \n", 
-                   ulDay + DATE_INCREMENT, ulMonth, ulYear);
+                   ulDay, ulMonth + INCREMENT, ulYear);
     
     return true;
 }
-//******************************.AppTimerCheckLeapYear.*************************
+//**************************.AppTimerCheckLeapYear.*****************************
 // Purpose : To check if the given year is a leap year. 
 // Inputs  : A value corresponding to an year.
 // Outputs : None
 // Return  : True if leap year and False if not. 
 // Notes   : None
 //******************************************************************************
-bool AppTimerCheckLeapYear(uint32 ulYearToCheck)
+static bool AppTimerCheckLeapYear(uint32 ulYearToCheck)
 {
     bool blResult = false;
-    if (ulYearToCheck % LEAP_YEAR_MULTIPLE == ZERO && 
-        ulYearToCheck % HUNDRED == ZERO || 
-        ulYearToCheck % FOUR_HUNDRED == ZERO)
+    if (ulYearToCheck % LEAP_YEAR_MULTIPLE == ZERO && (
+        ulYearToCheck % HUNDRED != ZERO || 
+        ulYearToCheck % FOUR_HUNDRED == ZERO))
         {
             blResult = true;
         }
