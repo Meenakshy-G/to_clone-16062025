@@ -34,13 +34,16 @@
 #define NORMAL              (30)
 #define EXTRA               (31)
 #define FEBRUARY            (28)
-#define LEAP                (29)
+#define LEAP_DAYS           (29)
 #define ZERO                (0)
 #define ONE                 (1)
+#define INDEX_ZERO          (0)
+#define INDEX_ONE           (1)
+
 //***************************** Global Variables ******************************* 
 
 //**************************** Forward Declarations **************************** 
-bool AppTimerEpochToTime(uint32 *ulpEpochtime);
+bool AppTimerEpochToTime(uint32 ulpEpochtime);
 
 //*********************** Inline Method Implementations ************************ 
 //******************************************************************************

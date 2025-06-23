@@ -15,7 +15,7 @@
 #include <stdbool.h>
 #include <time.h>
 #include <unistd.h>
-#include <string.h>
+#include <stdlib.h>
 #include "appTimer.h"
 #include "common.h"
 
@@ -36,36 +36,35 @@
 //******************************************************************************
 int main()
 {
-    time_t currentTime;
-    uint32 ulCurrentTimeIst;
-    uint32 ulCurrentTimePst;
+    time_t ulcurrentTime = 0;
+    uint32 ulcurrentTimeUtc = 0;
+    uint32 ulCurrentTimeIst = 0;
+    uint32 ulCurrentTimePst = 0;
+    uint32 ulEpochUtc = 0;
 
     while (true)
     {
-        time(&currentTime);
-        uint32 ulEpochStorage = currentTime;
-        uint32 ulEpochStorage2 = currentTime;
-        uint32 ulEpochStorage3 = currentTime;
+        ulcurrentTime = time(NULL);
+        ulEpochUtc = ulcurrentTime;
         printf("UTC (0:00)\n");
         printf("--------------------\n");
-
-        AppTimerEpochToTime(&currentTime);
-        printf("Epoch: %ld\n", ulEpochStorage);
+        ulcurrentTimeUtc = ulcurrentTime;
+        AppTimerEpochToTime(ulcurrentTimeUtc);
+        printf("Epoch: %ld\n", ulEpochUtc);
         printf("\n");
-
         printf("IST (+05:30)\n");
         printf("--------------------\n");
-        ulCurrentTimeIst = ulEpochStorage2 + IST_TIME_DIFFERENCE; 
-        AppTimerEpochToTime(&ulCurrentTimeIst);
+        ulCurrentTimeIst = ulcurrentTime + IST_TIME_DIFFERENCE;
+        AppTimerEpochToTime(ulCurrentTimeIst);
         printf("\n");
-
         printf("PST (-07:00)\n");
         printf("--------------------\n");
-        ulCurrentTimePst = ulEpochStorage3 - PST_TIME_DIFFERENCE;
-        AppTimerEpochToTime(&ulCurrentTimePst);
+        ulCurrentTimePst = ulcurrentTime - PST_TIME_DIFFERENCE;
+        AppTimerEpochToTime(ulCurrentTimePst);
         printf("\n");
 
         sleep(SLEEP_TIME);
+        system("cls");
     }
 
     return 0;

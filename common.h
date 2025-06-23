@@ -14,6 +14,7 @@
 typedef unsigned char uint8;
 typedef unsigned long uint32;
 typedef unsigned short uint16;
+typedef signed long int32;
 
 //***************************** Global Constants ******************************* 
 
