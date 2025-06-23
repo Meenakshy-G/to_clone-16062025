@@ -36,14 +36,13 @@
 //******************************************************************************
 int main()
 {
-    static time_t ulcurrentTime = 0;
-    static uint32 ulcurrentTimeUtc = 0;
-    static uint32 ulCurrentTimeIst = 0;
-    static uint32 ulCurrentTimePst = 0;
-    static uint32 ulEpochUtc = 0;
-
     while (true)
     {
+        time_t ulcurrentTime = 0;
+        uint32 ulcurrentTimeUtc = 0;
+        uint32 ulCurrentTimeIst = 0;
+        uint32 ulCurrentTimePst = 0;
+        uint32 ulEpochUtc = 0;
         ulcurrentTime = time(NULL);
         ulEpochUtc = ulcurrentTime;
         printf("UTC (0:00)\n");
