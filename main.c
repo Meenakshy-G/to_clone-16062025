@@ -36,11 +36,11 @@
 //******************************************************************************
 int main()
 {
-    time_t ulcurrentTime = 0;
-    uint32 ulcurrentTimeUtc = 0;
-    uint32 ulCurrentTimeIst = 0;
-    uint32 ulCurrentTimePst = 0;
-    uint32 ulEpochUtc = 0;
+    static time_t ulcurrentTime = 0;
+    static uint32 ulcurrentTimeUtc = 0;
+    static uint32 ulCurrentTimeIst = 0;
+    static uint32 ulCurrentTimePst = 0;
+    static uint32 ulEpochUtc = 0;
 
     while (true)
     {
@@ -50,7 +50,7 @@ int main()
         printf("--------------------\n");
         ulcurrentTimeUtc = ulcurrentTime;
         AppTimerEpochToTime(ulcurrentTimeUtc);
-        printf("Epoch: %ld\n", ulEpochUtc);
+        printf("Epoch: %lu\n", ulEpochUtc);
         printf("\n");
         printf("IST (+05:30)\n");
         printf("--------------------\n");
