@@ -43,6 +43,7 @@ int main()
         uint32 ulCurrentTimeIst = 0;
         uint32 ulCurrentTimePst = 0;
         uint32 ulEpochUtc = 0;
+
         ulcurrentTime = time(NULL);
         ulEpochUtc = ulcurrentTime;
         printf("UTC (0:00)\n");
