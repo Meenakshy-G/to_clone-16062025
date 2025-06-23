@@ -28,12 +28,12 @@ static bool AppTimerCheckLeapYear(uint32 ulYearToCheck);
 
 //***************************.AppTimerEpochToTime.******************************
 // Purpose : To print the values of date and time of corresponding timezones. 
-// Inputs  : Pointer ulpEpochTime that points to value of epoch.
+// Inputs  : Variable ulEpochTime that gives epoch value.
 // Outputs : None
 // Return  : True in case of success and False in case of failure. 
 // Notes   : None
 //******************************************************************************
-bool AppTimerEpochToTime(uint32 ulpEpochtime)
+bool AppTimerEpochToTime(uint32 ulEpochtime)
 {
     uint32 ulpEpochSeconds = 0;
     uint32 ulSeconds = 0;
@@ -48,15 +48,15 @@ bool AppTimerEpochToTime(uint32 ulpEpochtime)
     uint32 ulDay = 0;
     uint8 ucAmOrPm[AM_PM_LIMIT];
 
-    ulpEpochSeconds = ulpEpochtime;
-    ulSeconds = (ulpEpochtime) % SECONDS_MINUTES; // Find seconds.
-    ulpEpochtime = ulpEpochtime / SECONDS_MINUTES;
+    ulpEpochSeconds = ulEpochtime;
+    ulSeconds = (ulEpochtime) % SECONDS_MINUTES; // Find seconds.
+    ulEpochtime = ulEpochtime / SECONDS_MINUTES;
 
-    ulMinutes = (ulpEpochtime) % SECONDS_MINUTES; // Find minutes.
-    ulpEpochtime = ulpEpochtime / SECONDS_MINUTES;
+    ulMinutes = (ulEpochtime) % SECONDS_MINUTES; // Find minutes.
+    ulEpochtime = ulEpochtime / SECONDS_MINUTES;
 
-    ulHours = (ulpEpochtime) % HOURS; // Find hours.
-    ulpEpochtime = ulpEpochtime / HOURS;
+    ulHours = (ulEpochtime) % HOURS; // Find hours.
+    ulEpochtime = ulEpochtime / HOURS;
 
     ulYear = YEAR_STARTING;
     ulpEpochSeconds /= SECONDS_IN_DAY; // Remaining days in epoch.
@@ -109,9 +109,9 @@ bool AppTimerEpochToTime(uint32 ulpEpochtime)
         ucAmOrPm[INDEX_ONE] = 'M';
     }
 
-    printf("TIME : %02ld:%02ld:%02ld %s\n", 
+    printf("TIME : %02lu:%02lu:%02lu %s\n", 
                    ulHours, ulMinutes, ulSeconds, ucAmOrPm);
-    printf("DATE : %02ld/%02ld/%02ld \n", 
+    printf("DATE : %02lu/%02lu/%02lu \n", 
                    ulDay, ulMonth + INCREMENT, ulYear);
 
     return true;
