@@ -48,20 +48,25 @@ bool AppTimerEpochToTime(uint32 ulEpochtime)
     uint8 ucAmOrPm[AM_PM_LIMIT];
 
     ulEpochSeconds = ulEpochtime;
-    ulSeconds = (ulEpochtime) % SECONDS_MINUTES; // Find seconds.
+    // Find seconds.
+    ulSeconds = (ulEpochtime) % SECONDS_MINUTES; 
     ulEpochtime = ulEpochtime / SECONDS_MINUTES;
-    ulMinutes = (ulEpochtime) % SECONDS_MINUTES; // Find minutes.
+    // Find minutes.
+    ulMinutes = (ulEpochtime) % SECONDS_MINUTES; 
     ulEpochtime = ulEpochtime / SECONDS_MINUTES;
-    ulHours = (ulEpochtime) % HOURS; // Find hours.
+    // Find hours.
+    ulHours = (ulEpochtime) % HOURS; 
 
     ulYear = YEAR_STARTING;
-    ulEpochSeconds /= SECONDS_IN_DAY; // Remaining days in epoch.
+    // Remaining days in epoch.
+    ulEpochSeconds /= SECONDS_IN_DAY; 
 
     while (INCREMENT)  // To find year.
     {
         uint32 ulDayInYear = 0;
 
-        if (AppTimerCheckLeapYear(ulYear))  // Include case of leap year.
+        // Include case of leap year.
+        if (AppTimerCheckLeapYear(ulYear))  
         {
             ulDayInYear = LEAP_YEAR;
         }
@@ -89,10 +94,12 @@ bool AppTimerEpochToTime(uint32 ulEpochtime)
     while (ulEpochSeconds >= ulDaysInMonth[ulMonth])
     {
         ulEpochSeconds -= ulDaysInMonth[ulMonth];
-        ulMonth ++; // Find month.
+        // Month count.
+        ulMonth ++; 
     }
 
-    ulDay = ulEpochSeconds + INCREMENT; // Find day.
+    // Find day.
+    ulDay = ulEpochSeconds + INCREMENT; 
 
     if (HOUR_LIMIT <= ulHours)
     {
