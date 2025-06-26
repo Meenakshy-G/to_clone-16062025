@@ -64,7 +64,7 @@ int main()
         printf("\n");
 
         sleep(SLEEP_TIME);
-        system("cls");
+        system("clear");
     }
 
     return 0;
