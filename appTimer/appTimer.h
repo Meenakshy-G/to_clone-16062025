@@ -40,10 +40,11 @@
 #define INDEX_ZERO          (0)
 #define INDEX_ONE           (1)
 
-//***************************** Global Variables ******************************* 
+//***************************** Global Variables *******************************
 
 //**************************** Forward Declarations **************************** 
 bool AppTimerEpochToTime(uint32 ulpEpochtime);
+bool PrintLedStatus(bool *blpLedStatus);
 
 //*********************** Inline Method Implementations ************************ 
 //******************************************************************************
