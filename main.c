@@ -1,17 +1,24 @@
-//**************************** HELLO WORLD *************************************
+//**************************** TimerApp ****************************************
 // Copyright (c) 2025 Trenser Technology Solutions
 // All Rights Reserved
 //******************************************************************************
 // File    : main.c
-// Summary : To print hello world
-// Note    : No other header files included.
+// Summary : Display systems current time in real time 
+//           in GMT, IST, PST, timezones.
+// Note    : Included header file from appTimer folder.
 // Author  : Meenakshy G
-// Date    : 16/JUNE/2025
+// Date    : 18/JUNE/2025
 //******************************************************************************
 
 //******************************* Include Files ********************************
 #include <stdio.h>
-    
+#include <stdbool.h>
+#include <time.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include "appTimer.h"
+#include "common.h"
+
 //******************************* Local Types **********************************
 
 //***************************** Local Constants ********************************
@@ -21,7 +28,7 @@
 //****************************** Local Functions *******************************
 
 //******************************.mainFunction.**********************************
-// Purpose : Printing statement for user to read.
+// Purpose : Display menu and refresh time
 // Inputs  : None
 // Outputs : None
 // Return  : Zero
@@ -29,7 +36,36 @@
 //******************************************************************************
 int main()
 {
-    printf("HELLO WORLD");
+    time_t ulcurrentTime = 0;
+    uint32 ulcurrentTimeUtc = 0;
+    uint32 ulCurrentTimeIst = 0;
+    uint32 ulCurrentTimePst = 0;
+    uint32 ulEpochUtc = 0;
+
+    while (true)
+    {
+        ulcurrentTime = time(NULL);
+        ulEpochUtc = ulcurrentTime;
+        printf("UTC (0:00)\n");
+        printf("--------------------\n");
+        ulcurrentTimeUtc = ulcurrentTime;
+        AppTimerEpochToTime(ulcurrentTimeUtc);
+        printf("Epoch: %lu\n", ulEpochUtc);
+        printf("\n");
+        printf("IST (+05:30)\n");
+        printf("--------------------\n");
+        ulCurrentTimeIst = ulcurrentTime + IST_TIME_DIFFERENCE;
+        AppTimerEpochToTime(ulCurrentTimeIst);
+        printf("\n");
+        printf("PST (-07:00)\n");
+        printf("--------------------\n");
+        ulCurrentTimePst = ulcurrentTime - PST_TIME_DIFFERENCE;
+        AppTimerEpochToTime(ulCurrentTimePst);
+        printf("\n");
+
+        sleep(SLEEP_TIME);
+        system("cls");
+    }
 
     return 0;
 }
