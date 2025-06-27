@@ -150,22 +150,21 @@ bool PrintLedStatus(bool *blpLedStatus)
 {
     bool blResult = false;
 
-    if (blpLedStatus == NULL)
+    if (NULL == blpLedStatus)
     {
         printf("NULL POINTER");
-        blResult = false;
     }
 
-    if (*blpLedStatus == false)
+    if (*blpLedStatus)
     {
-        printf("LED OFF\n");
-        *blpLedStatus = true;
+        printf("LED ON\n");
+        *blpLedStatus = false;
         blResult = true;
     }
     else
     {
-        printf("LED ON\n");
-        *blpLedStatus = false;
+        printf("LED OFF\n");
+        *blpLedStatus = true;
         blResult = true;
     }
 
