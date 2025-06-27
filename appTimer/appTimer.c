@@ -104,12 +104,15 @@ bool AppTimerEpochToTime(uint32 ulEpochtime)
     {
         ucAmOrPm[INDEX_ZERO] = 'P';
         ucAmOrPm[INDEX_ONE] = 'M';
+        ucAmOrPm[INDEX_TWO] = '\0';
+        
         ulHours -= HOUR_LIMIT;
     }
     else
     {
         ucAmOrPm[INDEX_ZERO] = 'A';
         ucAmOrPm[INDEX_ONE] = 'M';
+        ucAmOrPm[INDEX_TWO] = '\0';
     }
     printf("TIME : %02lu:%02lu:%02lu %s\n", 
                    ulHours, ulMinutes, ulSeconds, ucAmOrPm);

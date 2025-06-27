@@ -21,7 +21,7 @@
 #define YEAR_STARTING       (1970)
 #define SECONDS_MINUTES     (60)
 #define HOURS               (24)
-#define AM_PM_LIMIT         (2)
+#define AM_PM_LIMIT         (3)
 #define SLEEP_TIME          (1)
 #define HOUR_LIMIT          (12)
 #define MONTHS              (12)
@@ -39,6 +39,7 @@
 #define ONE                 (1)
 #define INDEX_ZERO          (0)
 #define INDEX_ONE           (1)
+#define INDEX_TWO           (2)
 
 //***************************** Global Variables *******************************
 

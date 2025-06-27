@@ -35,11 +35,11 @@
 //******************************************************************************
 int main()
 {
-    time_t ulcurrentTime = 0;
+    time_t ulcurrentTime    = 0;
     uint32 ulcurrentTimeUtc = 0;
     uint32 ulCurrentTimeIst = 0;
     uint32 ulCurrentTimePst = 0;
-    uint32 ulEpochUtc = 0;
+    uint32 ulEpochUtc       = 0;
     bool blLedStatus = false;
 
     while (true)
