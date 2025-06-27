@@ -3,3 +3,5 @@
 *.s
 *.vscode
 APPTIMER
+APPTIMER_PI
+APPTIMER_PI_64

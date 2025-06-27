@@ -4,7 +4,7 @@
 //******************************************************************************
 // File    : main.c
 // Summary : Display systems current time in real time 
-//           in GMT, IST, PST, timezones and give status of LED
+//           in GMT, IST, PST, timezones and give status of LED.
 // Note    : Included header file from appTimer folder.
 // Author  : Meenakshy G
 // Date    : 18/JUNE/2025

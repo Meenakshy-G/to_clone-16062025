@@ -105,7 +105,7 @@ bool AppTimerEpochToTime(uint32 ulEpochtime)
         ucAmOrPm[INDEX_ZERO] = 'P';
         ucAmOrPm[INDEX_ONE] = 'M';
         ucAmOrPm[INDEX_TWO] = '\0';
-        
+
         ulHours -= HOUR_LIMIT;
     }
     else
@@ -142,6 +142,7 @@ static bool AppTimerCheckLeapYear(uint32 ulYearToCheck)
 
     return blResult;
 }
+
 //**************************.PrintLedStatus.************************************
 // Purpose : To print the status of LED.
 // Inputs  : A pointer flag blpLedStatus to check current led status.
