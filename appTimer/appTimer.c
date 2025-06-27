@@ -148,24 +148,22 @@ static bool AppTimerCheckLeapYear(uint32 ulYearToCheck)
 //******************************************************************************
 bool PrintLedStatus(bool *blpLedStatus)
 {
-    bool blResult = false;
+    bool blResult = true;
 
     if (NULL == blpLedStatus)
     {
         printf("NULL POINTER");
+        blResult = false;
     }
-
-    if (*blpLedStatus)
+    else if (*blpLedStatus)
     {
         printf("LED ON\n");
         *blpLedStatus = false;
-        blResult = true;
     }
     else
     {
         printf("LED OFF\n");
         *blpLedStatus = true;
-        blResult = true;
     }
 
     return blResult;
