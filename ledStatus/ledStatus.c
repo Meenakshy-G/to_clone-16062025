@@ -34,22 +34,18 @@ static bool sblLedStatus = false;
 //******************************************************************************
 bool LedStatusDisplay(void)
 {
-    bool blResult = false;
-
     if (sblLedStatus)
     {
         printf("LED ON\n");
         sblLedStatus = false;
-        blResult = true;
     }
     else
     {
         printf("LED OFF\n");
         sblLedStatus = true;
-        blResult = true;
     }
 
-    return blResult;
+    return true;
 }
 
 //******************************************************************************

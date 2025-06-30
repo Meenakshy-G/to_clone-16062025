@@ -74,11 +74,7 @@ int main()
             printf("ERROR");
         }
         printf("\n");
-
-        if(!LedStatusDisplay())
-        {
-            printf("ERROR");
-        }
+        LedStatusDisplay();
 
         sleep(SLEEP_TIME);
         system("clear");
