@@ -1,4 +1,4 @@
-//**************************** TimerApp ****************************************
+//**************************** LedStatus ***************************************
 // Copyright (c) 2025 Trenser Technology Solutions
 // All Rights Reserved
 //******************************************************************************
@@ -13,14 +13,12 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include "ledStatus.h"
-#include "../common.h"
 
 //***************************** Local Types ************************************
 
 //***************************** Local Constants ********************************
 
 //***************************** Local Variables ********************************
-static bool sblLedStatus = false;
 
 //***************************** Local Functions ********************************
 
@@ -34,6 +32,8 @@ static bool sblLedStatus = false;
 //******************************************************************************
 bool LedStatusDisplay(void)
 {
+    static bool sblLedStatus = false;
+
     if (sblLedStatus)
     {
         printf("LED ON\n");
