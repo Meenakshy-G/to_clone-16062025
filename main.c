@@ -41,7 +41,6 @@ int main()
     uint32 ulCurrentTimeIst = 0;
     uint32 ulCurrentTimePst = 0;
     uint32 ulEpochUtc       = 0;
-    bool blLedStatus = false;
 
     while (true)
     {
@@ -76,7 +75,7 @@ int main()
         }
         printf("\n");
 
-        if(!LedStatusDisplay(&blLedStatus))
+        if(!LedStatusDisplay())
         {
             printf("ERROR");
         }

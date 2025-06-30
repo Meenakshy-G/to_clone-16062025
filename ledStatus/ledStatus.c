@@ -20,35 +20,33 @@
 //***************************** Local Constants ********************************
 
 //***************************** Local Variables ********************************
+static bool sblLedStatus = false;
 
 //***************************** Local Functions ********************************
 
 //******************************************************************************
 //******************************.LedStatusDisplay.******************************
 // Purpose : To print the status of LED.
-// Inputs  : A pointer flag blpLedStatus to check current led status.
+// Inputs  : None
 // Outputs : None
 // Return  : True for successfull completion, else false. 
 // Notes   : None
 //******************************************************************************
-bool LedStatusDisplay(bool *blpLedStatus)
+bool LedStatusDisplay(void)
 {
-    bool blResult = true;
+    bool blResult = false;
 
-    if (NULL == blpLedStatus)
-    {
-        printf("NULL POINTER");
-        blResult = false;
-    }
-    else if (*blpLedStatus)
+    if (sblLedStatus)
     {
         printf("LED ON\n");
-        *blpLedStatus = false;
+        sblLedStatus = false;
+        blResult = true;
     }
     else
     {
         printf("LED OFF\n");
-        *blpLedStatus = true;
+        sblLedStatus = true;
+        blResult = true;
     }
 
     return blResult;
