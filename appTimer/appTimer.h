@@ -45,7 +45,6 @@
 
 //**************************** Forward Declarations **************************** 
 bool AppTimerEpochToTime(uint32 ulpEpochtime);
-bool PrintLedStatus(bool *blpLedStatus);
 
 //*********************** Inline Method Implementations ************************ 
 //******************************************************************************

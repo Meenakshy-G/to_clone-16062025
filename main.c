@@ -16,6 +16,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include "appTimer.h"
+#include "ledStatus.h"
 #include "common.h"
 
 //******************************* Local Types **********************************
@@ -75,7 +76,7 @@ int main()
         }
         printf("\n");
 
-        if(!PrintLedStatus(&blLedStatus))
+        if(!LedStatusDisplay(&blLedStatus))
         {
             printf("ERROR");
         }

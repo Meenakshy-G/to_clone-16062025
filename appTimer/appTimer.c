@@ -143,35 +143,5 @@ static bool AppTimerCheckLeapYear(uint32 ulYearToCheck)
     return blResult;
 }
 
-//**************************.PrintLedStatus.************************************
-// Purpose : To print the status of LED.
-// Inputs  : A pointer flag blpLedStatus to check current led status.
-// Outputs : None
-// Return  : True for successfull completion, else false. 
-// Notes   : None
-//******************************************************************************
-bool PrintLedStatus(bool *blpLedStatus)
-{
-    bool blResult = true;
-
-    if (NULL == blpLedStatus)
-    {
-        printf("NULL POINTER");
-        blResult = false;
-    }
-    else if (*blpLedStatus)
-    {
-        printf("LED ON\n");
-        *blpLedStatus = false;
-    }
-    else
-    {
-        printf("LED OFF\n");
-        *blpLedStatus = true;
-    }
-
-    return blResult;
-}
-
 //******************************************************************************
 // EOF
