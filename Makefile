@@ -1,6 +1,8 @@
 CC = gcc
 SRC = main.c appTimer/appTimer.c ledStatus/ledStatus.c
+ASSEMBLY = release/main.s release/appTimer.s release/ledStatus.s
 OBJECT = release/main.o release/appTimer.o release/ledStatus.o
+DEBUG = debug/main.o debug/appTimer.o debug/ledStatus.o
 CFLAGS = -Wall -Werror -IappTimer -IledStatus
 CFLAGS_NOPATH = -Wall -Werror
 DEBUG_OPTIONS = -g -c -O0 
@@ -12,27 +14,24 @@ all : create_folder linux rpi
 	$(CC) $(CFLAGS) $(OBJECT) -o release/APPTIMER
 
 create_folder :
-	mkdir $(FOLDERS)
-
-linux : object_files assembly_files debug_files
-
-object_files : 
-	$(CC) -c $(CFLAGS)  main.c -o release/main.o
-	$(CC) -c $(PATH_APPTIMER) -o release/appTimer.o
-	$(CC) -c $(PATH_LED) -o release/ledStatus.o
+	mkdir -p $(FOLDERS)
 	
+linux : create_folder object_files assembly_files debug_files
 
-assembly_files :  
-	$(CC) -S $(CFLAGS) main.c -o release/main.s
-	$(CC) -S $(CFLAGS_NOPATH) $(PATH_APPTIMER) -o release/appTimer.s
-	$(CC) -S $(CFLAGS_NOPATH) $(PATH_LED) -o release/ledStatus.s
+assembly_files : create_folder $(ASSEMBLY)
+VPATH = .:appTimer:ledStatus
+release/%.s : %.c
+	$(CC) -S $(CFLAGS) $^ -o $@
 
-debug_files :
-	$(CC) $(DEBUG_OPTIONS) $(CFLAGS) main.c -o debug/main.o
-	$(CC) $(DEBUG_OPTIONS) $(PATH_APPTIMER) -o debug/appTimer.o
-	$(CC) $(DEBUG_OPTIONS) $(PATH_LED) -o debug/ledStatus.o
+object_files : create_folder $(OBJECT)
+release/%.o : %.c
+	$(CC) -c $(CFLAGS) $^ -o $@
 
-rpi : $(SRC)
+debug_files : create_folder $(DEBUG)
+debug/%.o : %.c
+	$(CC) $(DEBUG_OPTIONS) $(CFLAGS) $^ -o $@
+
+rpi : create_folder $(SRC)
 	aarch64-linux-gnu-$(CC) $(CFLAGS) $(SRC) -o release/rpi
 
 clean : 
