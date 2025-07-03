@@ -1,38 +1,56 @@
+# Compilers
 CC = gcc
-SRC = main.c appTimer/appTimer.c ledStatus/ledStatus.c
-ASSEMBLY = release/main.s release/appTimer.s release/ledStatus.s
-OBJECT = release/main.o release/appTimer.o release/ledStatus.o
-DEBUG = debug/main.o debug/appTimer.o debug/ledStatus.o
-CFLAGS = -Wall -Werror -IappTimer -IledStatus
-CFLAGS_NOPATH = -Wall -Werror
-DEBUG_OPTIONS = -g -c -O0 
-PATH_LED = ledStatus/ledStatus.c
-PATH_APPTIMER = appTimer/appTimer.c 
-FOLDERS = release debug
+CROSS_CC = aarch64-linux-gnu-gcc
 
+# Source files. 
+SRC = $(wildcard *.c appTimer/*.c ledStatus/*.c)
+FILE_NAMES = $(notdir $(SRC))
+
+# Generated files
+OBJECT  = $(patsubst %.c,release/%.o,$(FILE_NAMES))
+DEBUG   = $(patsubst %.c,debug/%.o,$(FILE_NAMES))
+ASSEMBLY = $(patsubst %.c,release/%.s,$(FILE_NAMES))
+
+# Options
+CFLAGS = -Wall -Werror -IappTimer -IledStatus
+DEBUG_OPTIONS = -g -c -O0 
+FOLDERS = release debug
+VPATH = .:appTimer:ledStatus
+
+# Make all
 all : create_folder linux rpi 
 	$(CC) $(CFLAGS) $(OBJECT) -o release/APPTIMER
 
+# Create folder for output
 create_folder :
 	mkdir -p $(FOLDERS)
-	
+
+# Make Linux
 linux : create_folder object_files assembly_files debug_files
 
+# Make assembly files into release folder
 assembly_files : create_folder $(ASSEMBLY)
-VPATH = .:appTimer:ledStatus
 release/%.s : %.c
-	$(CC) -S $(CFLAGS) $^ -o $@
+	$(CC) -S $(CFLAGS) $< -o $@
 
+# Make object files into release folder
 object_files : create_folder $(OBJECT)
 release/%.o : %.c
-	$(CC) -c $(CFLAGS) $^ -o $@
+	$(CC) -c $(CFLAGS) $< -o $@
 
+# Make object files with debug information into debug folder
 debug_files : create_folder $(DEBUG)
 debug/%.o : %.c
-	$(CC) $(DEBUG_OPTIONS) $(CFLAGS) $^ -o $@
+	$(CC) $(DEBUG_OPTIONS) $(CFLAGS) $< -o $@
 
+# Cross compilation for raspberry pi
 rpi : create_folder $(SRC)
-	aarch64-linux-gnu-$(CC) $(CFLAGS) $(SRC) -o release/rpi
+	$(CROSS_CC) $(CFLAGS) $(SRC) -o release/rpi
 
+# Generate executable with debugging information 
+debug : debug_files
+	$(CC) debug/* -o debug/APPTIMER_DEBUG
+
+# Remove all the generated folders
 clean : 
-	rm -r $(FOLDERS)
+	rm -rf $(FOLDERS)
