@@ -1,17 +1,22 @@
 cmake_minimum_required(VERSION 3.10)
-project(TIMERAPP C)
+project(TIMER_APP C)
+include(ExternalProject)
 
-include_directories(${CMAKE_SOURCE_DIR}/appTimer ${CMAKE_SOURCE_DIR}/ledStatus)
-file(GLOB SRC_FILES "${CMAKE_SOURCE_DIR}/*.c" "${CMAKE_SOURCE_DIR}/appTimer/*.c" 
-               "${CMAKE_SOURCE_DIR}/ledStatus/*.c")
-
-add_executable(APPTIMER ${SRC_FILES})
-target_compile_options(APPTIMER PRIVATE -Wall -Werror)
-set_target_properties(APPTIMER PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/release)
-
-add_executable(DEBUG_APPTIMER ${SRC_FILES})
-target_compile_options(DEBUG_APPTIMER PRIVATE -Wall -Werror -g -O0)
-set_target_properties(DEBUG_APPTIMER PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/debug)
-
-
-
+ExternalProject_Add(RELEASE
+SOURCE_DIR ${CMAKE_SOURCE_DIR}/Native_build
+BINARY_DIR ${CMAKE_BINARY_DIR}/release
+CMAKE_ARGS -DCMAKE_BUILD_TYPE=Release
+INSTALL_COMMAND ""
+)
+ExternalProject_Add(DEBUG
+SOURCE_DIR ${CMAKE_SOURCE_DIR}/Native_build
+BINARY_DIR ${CMAKE_BINARY_DIR}/debug
+CMAKE_ARGS -DCMAKE_BUILD_TYPE=Debug
+INSTALL_COMMAND ""
+)
+ExternalProject_Add(RELEASE_RPI
+SOURCE_DIR ${CMAKE_SOURCE_DIR}/Cross_compile_build
+BINARY_DIR ${CMAKE_BINARY_DIR}/release_rpi
+CMAKE_ARGS -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=aarch64-linux-gnu-gcc
+INSTALL_COMMAND ""
+)
