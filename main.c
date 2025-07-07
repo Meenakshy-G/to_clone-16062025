@@ -4,12 +4,11 @@
 //******************************************************************************
 // File    : main.c
 // Summary : Display systems current time in real time 
-//           in GMT, IST, PST, timezones.
+//           in GMT, IST, PST, timezones and give status of LED.
 // Note    : Included header file from appTimer folder.
 // Author  : Meenakshy G
 // Date    : 18/JUNE/2025
 //******************************************************************************
-
 //******************************* Include Files ********************************
 #include <stdio.h>
 #include <stdbool.h>
@@ -17,6 +16,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include "appTimer.h"
+#include "ledStatus.h"
 #include "common.h"
 
 //******************************* Local Types **********************************
@@ -28,7 +28,7 @@
 //****************************** Local Functions *******************************
 
 //******************************.mainFunction.**********************************
-// Purpose : Display menu and refresh time
+// Purpose : Display time and LED status and refresh the time.
 // Inputs  : None
 // Outputs : None
 // Return  : Zero
@@ -36,11 +36,12 @@
 //******************************************************************************
 int main()
 {
-    time_t ulcurrentTime = 0;
+    time_t ulcurrentTime    = 0;
     uint32 ulcurrentTimeUtc = 0;
     uint32 ulCurrentTimeIst = 0;
     uint32 ulCurrentTimePst = 0;
-    uint32 ulEpochUtc = 0;
+    uint32 ulEpochUtc       = 0;
+    uint16 unCheckReturn    = 0; 
 
     while (true)
     {
@@ -49,22 +50,37 @@ int main()
         printf("UTC (0:00)\n");
         printf("--------------------\n");
         ulcurrentTimeUtc = ulcurrentTime;
-        AppTimerEpochToTime(ulcurrentTimeUtc);
+
+        if (!AppTimerEpochToTime(ulcurrentTimeUtc))
+        {
+            printf("ERROR");
+        }
         printf("Epoch: %lu\n", ulEpochUtc);
         printf("\n");
         printf("IST (+05:30)\n");
         printf("--------------------\n");
         ulCurrentTimeIst = ulcurrentTime + IST_TIME_DIFFERENCE;
-        AppTimerEpochToTime(ulCurrentTimeIst);
+
+        if (!AppTimerEpochToTime(ulCurrentTimeIst))
+        {
+            printf("ERROR");
+        }
         printf("\n");
         printf("PST (-07:00)\n");
         printf("--------------------\n");
         ulCurrentTimePst = ulcurrentTime - PST_TIME_DIFFERENCE;
-        AppTimerEpochToTime(ulCurrentTimePst);
+
+        if (!AppTimerEpochToTime(ulCurrentTimePst))
+        {
+            printf("ERROR");
+        }
         printf("\n");
+        LedStatusDisplay();
 
         sleep(SLEEP_TIME);
-        system("cls");
+        unCheckReturn = system("clear");
+        (void)unCheckReturn;
+
     }
 
     return 0;
