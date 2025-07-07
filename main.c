@@ -41,6 +41,7 @@ int main()
     uint32 ulCurrentTimeIst = 0;
     uint32 ulCurrentTimePst = 0;
     uint32 ulEpochUtc       = 0;
+    uint16 unCheckReturn    = 0; 
 
     while (true)
     {
@@ -77,7 +78,9 @@ int main()
         LedStatusDisplay();
 
         sleep(SLEEP_TIME);
-        system("clear");
+        unCheckReturn = system("clear");
+        (void)unCheckReturn;
+
     }
 
     return 0;
