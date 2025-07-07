@@ -3,8 +3,8 @@
 // All Rights Reserved
 //******************************************************************************
 // File    : main.c
-// Summary : Display systems current time in real time 
-//           in GMT, IST, PST, timezones and give status of LED.
+// Summary : Display systems current time in real time and 
+//           display status of LED and blink LED.
 // Note    : Included header file from appTimer folder.
 // Author  : Meenakshy G
 // Date    : 18/JUNE/2025
@@ -76,11 +76,8 @@ int main()
         }
         printf("\n");
         LedStatusDisplay();
-
-        sleep(SLEEP_TIME);
         unCheckReturn = system("clear");
         (void)unCheckReturn;
-
     }
 
     return 0;
