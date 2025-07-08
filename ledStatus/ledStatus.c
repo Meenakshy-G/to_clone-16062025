@@ -13,8 +13,10 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include "ledStatus.h"
+#include "gpioWrapper.h"
 #include <unistd.h>
 #include <gpiod.h>
+#include "../common.h"
 
 //***************************** Local Types ************************************
 
@@ -35,44 +37,38 @@
 bool LedStatusDisplay(void)
 {
     #ifdef RUN_ON_PI
-    struct gpiod_chip *pstChip = NULL;
-    struct gpiod_line *pstLine = NULL;
     static bool sblLed = false;
-
-    pstChip = gpiod_chip_open_by_name(GPIO_CHIP_NAME);
-
-    if (!pstChip) 
-    {
-        perror("Error in opening the chip");
-    }
-    pstLine = gpiod_chip_get_line(pstChip, LED_PIN);
-
-    if (!pstLine) 
-    {
-        perror("Error in accessing the line");
-        gpiod_chip_close(pstChip);
-    }
-    gpiod_line_request_output(pstLine, "blink-led", 0);
 
     if (sblLed)
     {
-        gpiod_line_set_value(pstLine, 1);
+        GpioSetValue(true);
         sblLed = false;
         printf("LED ON\n");
         usleep(ON_TIME);
     }
     else
     {
-        gpiod_line_set_value(pstLine, 0);
+        GpioSetValue(false);
         sblLed = true;
         printf("LED OFF\n");
         usleep(OFF_TIME);
     }
-    gpiod_line_release(pstLine);
-    gpiod_chip_close(pstChip);
 
     return true;
+    #else
+    PrintStatus();
     #endif
+}
+
+//******************************.PrintStatus.***********************************
+// Purpose : To print status of led ON or OFF.
+// Inputs  : None
+// Outputs : None
+// Return  : True for successfull completion, else false. 
+// Notes   : None
+//******************************************************************************
+bool PrintStatus(void)
+{
     static bool sblLedStatus = false;
 
     if (sblLedStatus)
@@ -90,6 +86,5 @@ bool LedStatusDisplay(void)
 
     return true;
 }
-
 //******************************************************************************
 // EOF

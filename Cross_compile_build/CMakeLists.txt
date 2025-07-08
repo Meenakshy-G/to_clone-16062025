@@ -3,16 +3,17 @@ project(Cross C)
 
 # The directories to look for header files are added.
 include_directories(${CMAKE_SOURCE_DIR}/../appTimer 
-                    ${CMAKE_SOURCE_DIR}/../ledStatus)
+                    ${CMAKE_SOURCE_DIR}/../ledStatus
+                    ${CMAKE_SOURCE_DIR}/../gpioWrapper)
 
 # For cross-compilation to Raspberry pi.
 add_executable(TimerAppWithLED_RPI ${CMAKE_SOURCE_DIR}/../main.c
                     ${CMAKE_SOURCE_DIR}/../appTimer/appTimer.c
-                    ${CMAKE_SOURCE_DIR}/../ledStatus/ledStatus.c)
+                    ${CMAKE_SOURCE_DIR}/../ledStatus/ledStatus.c
+                    ${CMAKE_SOURCE_DIR}/../gpioWrapper/gpioWrapper.c)
+
 target_compile_options(TimerAppWithLED_RPI PRIVATE -fanalyzer)
-
 target_compile_definitions(TimerAppWithLED_RPI PRIVATE -DRUN_ON_PI)
-
 target_include_directories(TimerAppWithLED_RPI PRIVATE 
                            ${CMAKE_SOURCE_DIR}/../rpi64-sysroot/usr/include)
 target_link_directories(TimerAppWithLED_RPI PRIVATE 
