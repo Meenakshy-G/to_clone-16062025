@@ -57,14 +57,20 @@ $ cmake --build Build
 $ cmake -S. -B Build
 $ cd Build && make RELEASE
 
+Output: Build/Release_folder/TimerAppWithLED
+
 ### 3. Debug Build
  
 $ cmake -S. -B Build
 $ cd Build && make DEBUG
 
+Output: Build/Debug_folder/TimerAppWithLED
+
 ### 3. Build and Cross-compile
  
 $ cmake -S. -B Build
 $ cd Build && make RELEASE_RPI
+
+Output: Build/Release_rpi/TimerAppWithLED_RPI
 
 
