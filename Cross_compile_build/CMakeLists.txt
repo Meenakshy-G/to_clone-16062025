@@ -9,6 +9,7 @@ include_directories(${CMAKE_SOURCE_DIR}/../appTimer
 add_executable(TimerAppWithLED_RPI ${CMAKE_SOURCE_DIR}/../main.c
                     ${CMAKE_SOURCE_DIR}/../appTimer/appTimer.c
                     ${CMAKE_SOURCE_DIR}/../ledStatus/ledStatus.c)
+target_compile_options(TimerAppWithLED_RPI PRIVATE -fanalyzer)
 
 target_compile_definitions(TimerAppWithLED_RPI PRIVATE -DRUN_ON_PI)
 

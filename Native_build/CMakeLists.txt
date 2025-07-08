@@ -10,5 +10,5 @@ add_executable(TimerAppWithLED ${CMAKE_SOURCE_DIR}/../main.c
                                ${CMAKE_SOURCE_DIR}/../appTimer/appTimer.c
                                ${CMAKE_SOURCE_DIR}/../ledStatus/ledStatus.c)
 
-
+target_compile_options(TimerAppWithLED PRIVATE -fanalyzer)
 

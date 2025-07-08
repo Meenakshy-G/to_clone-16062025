@@ -14,9 +14,10 @@
 
 //***************************** Global Constants *******************************
 #define GPIO_CHIP_NAME "gpiochip0"
-#define LED_PIN (23)
-#define ON_TIME (840000)
-#define OFF_TIME (532000)
+#define LED_PIN         (23)
+#define ON_TIME         (840000)
+#define OFF_TIME        (532000)
+
 //***************************** Global Variables *******************************
 
 //**************************** Forward Declarations ****************************
