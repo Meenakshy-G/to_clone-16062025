@@ -2,3 +2,8 @@
 *.o
 *.s
 *.vscode
+outputFiles
+APPTIMER
+rpi
+build
+toolChainFolder
