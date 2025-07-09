@@ -3,7 +3,7 @@ CC = gcc
 CROSS_CC = aarch64-linux-gnu-gcc
 
 # Source files. 
-SRC = $(wildcard *.c appTimer/*.c ledStatus/*.c)
+SRC = $(wildcard *.c appTimer/*.c ledStatus/*.c gpioFunctions/*.c)
 FILE_NAMES = $(notdir $(SRC))
 
 # Generated files

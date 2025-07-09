@@ -15,8 +15,10 @@
 #include <time.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <gpiod.h>
 #include "appTimer.h"
 #include "ledStatus.h"
+#include "gpioFunctions.h"
 #include "common.h"
 
 //******************************* Local Types **********************************
@@ -28,7 +30,7 @@
 //****************************** Local Functions *******************************
 
 //******************************.mainFunction.**********************************
-// Purpose : Display time and LED status and refresh the time.
+// Purpose : Display time, shows LED status or blinks LED and refresh the time.
 // Inputs  : None
 // Outputs : None
 // Return  : Zero
@@ -42,6 +44,14 @@ int main()
     uint32 ulCurrentTimePst = 0;
     uint32 ulEpochUtc       = 0;
     uint16 unCheckReturn    = 0; 
+
+    #ifdef RUN_ON_PI
+    struct gpiod_line *pstLine = NULL;
+    struct gpiod_chip *pstChip = NULL;
+
+    GpioFunctionsInitialisation(&pstChip, &pstLine);
+    GpioFunctionsRequestOutput(&pstLine);
+    #endif
 
     while (true)
     {
@@ -75,10 +85,18 @@ int main()
             printf("ERROR");
         }
         printf("\n");
-        LedStatusDisplay();
+        #ifdef RUN_ON_PI
+        LedStatusDisplay(&pstLine);
+        #else
+        LedStatusPrint();
+        #endif
         unCheckReturn = system("clear");
         (void)unCheckReturn;
     }
+
+    #ifdef RUN_ON_PI
+    GpioFunctionsRelease(&pstChip, &pstLine);
+    #endif
 
     return 0;
 }
