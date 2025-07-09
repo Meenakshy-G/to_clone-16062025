@@ -12,14 +12,19 @@ DEBUG   = $(patsubst %.c,debug/%.o,$(FILE_NAMES))
 ASSEMBLY = $(patsubst %.c,release/%.s,$(FILE_NAMES))
 
 # Options
-CFLAGS = -Wall -Werror -IappTimer -IledStatus
+CFLAGS = -Wall -Werror -IappTimer -IledStatus -IgpioFunctions
+LIBRARY_PATH = rpi64-sysroot/usr/lib
+LIBRARY_NAME = gpiod
+INCLUDE_PATH = rpi64-sysroot/usr/include
+DEFENITION = -DRUN_ON_PI
 DEBUG_OPTIONS = -g -c -O0 
 FOLDERS = release debug
-VPATH = .:appTimer:ledStatus
+VPATH = .:appTimer:ledStatus:gpioFunctions\
+         :rpi64-sysroot/usr/include:rpi64-sysroot/usr/lib
 
 # Make all
 all : create_folder linux rpi 
-	$(CC) $(CFLAGS) $(OBJECT) -o release/APPTIMER
+	$(CC) $(CFLAGS) $(OBJECT) -o release/APPTIMER -l$(LIBRARY_NAME)
 
 # Create folder for output
 create_folder :
@@ -31,12 +36,12 @@ linux : create_folder object_files assembly_files debug_files
 # Make assembly files into release folder
 assembly_files : create_folder $(ASSEMBLY)
 release/%.s : %.c
-	$(CC) -S $(CFLAGS) $< -o $@
+	$(CC) -S $(CFLAGS) $< -o $@ 
 
 # Make object files into release folder
 object_files : create_folder $(OBJECT)
 release/%.o : %.c
-	$(CC) -c $(CFLAGS) $< -o $@
+	$(CC) -c $(CFLAGS) $< -o $@ 
 
 # Make object files with debug information into debug folder
 debug_files : create_folder $(DEBUG)
@@ -45,11 +50,12 @@ debug/%.o : %.c
 
 # Cross compilation for raspberry pi
 rpi : create_folder $(SRC)
-	$(CROSS_CC) $(CFLAGS) $(SRC) -o release/rpi
+	$(CROSS_CC) $(CFLAGS) $(DEFENITION) $(SRC) -L$(LIBRARY_PATH) \
+	-I$(INCLUDE_PATH) -o release/rpi -l$(LIBRARY_NAME)
 
 # Generate executable with debugging information 
 debug : debug_files
-	$(CC) debug/* -o debug/APPTIMER_DEBUG
+	$(CC) debug/* -o debug/APPTIMER_DEBUG 
 
 # Remove all the generated folders
 clean : 
