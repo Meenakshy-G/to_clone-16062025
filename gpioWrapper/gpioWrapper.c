@@ -70,9 +70,7 @@ bool GpioSetValue(bool blValue)
 //******************************************************************************
 bool GpioRequestOutput(struct gpiod_line *pstLineValue)
 {
-    gpiod_line_request_output(pstLineValue, "blink-led", 0);
-
-    if (!gpiod_line_request_output) 
+    if (ZERO > gpiod_line_request_output(pstLineValue, "blink-led", 0)) 
     {
         perror("Request output failed\n");
         gpiod_line_release(pstLineValue);
@@ -90,7 +88,10 @@ bool GpioRequestOutput(struct gpiod_line *pstLineValue)
 //******************************************************************************
 bool GpioSetLedValue(struct gpiod_line *pstLineValue, bool blLedValue)
 {
-    gpiod_line_set_value(pstLineValue, blLedValue);
+    if (ZERO > gpiod_line_set_value(pstLineValue, blLedValue))
+    {
+        perror("Failed to set GPIO line Value");
+    }
 
     return true;
 }
@@ -110,6 +111,5 @@ bool GpioRelease(struct gpiod_chip *pstChipValue,
 
     return true;
 }
-
 //******************************************************************************
 // EOF

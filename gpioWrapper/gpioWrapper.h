@@ -19,6 +19,7 @@
 #define LED_PIN         (23)
 #define ON_TIME         (840000)
 #define OFF_TIME        (532000)
+#define ZERO            (0)
 
 //***************************** Global Variables *******************************
 
