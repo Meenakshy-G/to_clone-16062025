@@ -33,7 +33,7 @@
 // Notes   : None
 //******************************************************************************
 bool GpioFunctionsInitialisation(struct gpiod_chip **pstChipValue, 
-                        struct gpiod_line **pstLineValue)
+                                 struct gpiod_line **pstLineValue)
 {
     *pstChipValue = gpiod_chip_open_by_name(GPIO_CHIP_NAME);
 
@@ -96,7 +96,7 @@ bool GpioFunctionsOutput(struct gpiod_line **pstLineValue, bool blLedValue)
 // Notes   : None
 //******************************************************************************
 bool GpioFunctionsRelease(struct gpiod_chip **pstChipValue, 
-                 struct gpiod_line **pstLineValue)
+                          struct gpiod_line **pstLineValue)
 {
     gpiod_line_release(*pstLineValue);
     gpiod_chip_close(*pstChipValue);
